@@ -1,0 +1,6 @@
+# Server ignores
+node_modules/
+.env
+
+# Context ignores
+.idea/
