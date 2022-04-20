@@ -4,7 +4,7 @@
     "description": "A little server",
     "main": "src/index.ts",
     "scripts": {
-        "format": "npx prettier --write . --config ./config/.prettierrc --ignore-path ./config/.prettierignore",
+        "format": "npx prettier --write .",
         "dev": "nodemon ./src/index",
         "test": "jest",
         "prebuild": "rm -rf dist",
@@ -79,6 +79,11 @@
     },
     "engines": {
         "node": ">=14.x"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "semi": false,
+        "singleQuote": true
     },
     "_moduleAliases": {
         "@src": "./src",
