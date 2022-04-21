@@ -9,7 +9,6 @@
         "test": "jest",
         "prebuild": "rm -rf dist",
         "build": "tsc -p tsconfig.build.json",
-        "prestart": "npm build",
         "start": "node src/index.js"
     },
     "dependencies": {

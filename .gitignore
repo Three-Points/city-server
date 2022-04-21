@@ -1,5 +1,6 @@
 # Server ignores
 node_modules/
+dist/
 .env
 
 # Context ignores

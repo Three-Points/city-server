@@ -1,0 +1,29 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⚙️ Configure GitHub Actions
+        uses: actions/checkout@v3
+
+      - name: 🛠 Setup PNPM
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.0.0-rc.7
+
+      - name: 🚧 Install dependencies and Build project
+        run: pnpm install && pnpm run build
+
+      - name: 🚀 Deploying to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: c7221bc3-853c-4b71-bccb-201d79f3bd4d
+          heroku_app_name: "threepoints-city"
+          heroku_email: "rorem.94.developer@gmail.com"
+          usedocker: true
