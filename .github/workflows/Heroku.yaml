@@ -3,7 +3,7 @@ name: Deploy to Heroku
 on:
   push:
     branches:
-      - development
+      - staging
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
       - name: 🚀 Deploying to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: c7221bc3-853c-4b71-bccb-201d79f3bd4d
-          heroku_app_name: "threepoints-city"
-          heroku_email: "rorem.94.developer@gmail.com"
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
           usedocker: true

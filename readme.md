@@ -1,53 +1,41 @@
-<img src="./project/assets/favicon.svg" alt="Logo" width="80" height="80" />
+# City Server
 
-# Thingst
+<img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=EBCB8B&label=version&prefix=v&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2FThree-Points%2Fcity-server%2Fdevelopment%2Fpackage.json" alt="Version project" />
 
-![Version](https://img.shields.io/badge/version-0.0.0-EBCB8B?style=for-the-badge&logo=node.js&logoColor=EBCB8B)
-![Node](https://img.shields.io/badge/v14.X-ECEFF4?style=for-the-badge&logo=Node.js)
-![Website](https://img.shields.io/badge/supported-A7C9E6?style=for-the-badge&logo=Typescript)
+### ✨Introduction
 
-### ✨About The Project
+The propuse of this project is create a little server to complete the master module named **Server Architecture** that will be a simple example of NodeJS server.
 
-The proposal of this project is to create a beautiful backend (REST or GraphQL) that will be a simple example of how to
-develop a backend with NodeJS and driver connection databases.
+Also, this project will consider next points:
 
-The use for this project will depend on the use case:
+- DevOps integration with CI environment (Github Actions).
+- Rest API definition
+- MVC architecture as clean architecture
 
--   For customize the integration project with CI environments (Heroku, AWS/GPC, etc).
--   For server a server done with MVC architecture.
--   Implementation of a simple API infrastructure (REST or GraphQL).
+> **Note.** This project is on https://[name].herokuapp.com
 
-> ⚠️ Note. This project is on https://thingst.herokuapp.com/
+### 📦 Unboxing project
 
-### 📦 Getting Started
+> **Note.** The project engine necessary is 14.x or mayor.
 
-#### ⚡️ Scripts
+#### ⚡️Scripts
 
-| Process        | Script          | Description                              |
-| -------------- | --------------- | ---------------------------------------- |
-| Initialization | `npm run init`  | Configure environment for git hooks.     |
-| Development    | `npm run dev`   | Serves to server on port 3000.           |
-| Testing        | `npm run test`  | Run all test (unit test or integration). |
-| Building       | `npm run build` | Build the code base to `dist` directory. |
-| Production     | `npm run start` | Simulate the server for production.      |
+| Script            | Description                                       |
+| ----------------- | :------------------------------------------------ |
+| `npm run install` | Install all dependencies and prepare the project. |
+| `npm run dev`     | Run server in mode `development` on port `3000`.  |
+| `npm run test`    | Run all test (both unit test and integration).    |
+| `npm run build`   | Build the base code to `dist` directory.          |
+| `npm run start`   | Run server in mode `production` on port `8080`.   |
 
-> Note. For mode Production, you can use [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) to simulate the project witih `heroku local`.
+> **Note.** For mode Production, you can use [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) to simulate the project witih `heroku local`.
 
 #### ⚙️ Configuration
 
-> Note. Thingst is already configured for git hooks and CI.
+> **Note.** Thingst is already configured for git hooks and CI.
 
-Husky is a tool that helps you to configure git hooks. Since the reason for use git hooks because each commit has
-the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) structure.
+Husky is a tool that helps you to configure git hooks. Since the reason for use git hooks because each commit has the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) structure.
 
 Also, the Github Actions is a tool that helps you to run the tests and build the project.
 
-> Note. You can view this feature at `.github/workflows` directory.
-
-### Author
-
-> **Emmanuel Rodriguez** - Full Stack Developer
-
-[![Twitter](https://img.shields.io/badge/Twitter-ECEFF4?style=for-the-badge&logo=Twitter)](https://twitter.com/roremDev)
-[![GitHub](https://img.shields.io/badge/GitHub-ECEFF4?style=for-the-badge&logo=GitHub&logoColor=2E3440)](https://github.com/roremdev)
-[![Medium](https://img.shields.io/badge/Medium-ECEFF4?style=for-the-badge&logo=Medium&logoColor=2E3440)](https://medium.com/@roremDev)
+> **Note.** You can view this feature at `.github/workflows` direcotry.
