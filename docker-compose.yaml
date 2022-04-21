@@ -1,11 +1,11 @@
 services:
-  node:
-    build: .
-    container_name: ${MODE}
-    working_dir: /server
-    environment:
-      - NODE_ENV=${MODE}
-    ports:
-      - ${PORT}:${PORT}
-    expose:
-      - ${PORT}
+    node:
+        build: .
+        container_name: ${MODE}
+        working_dir: /server
+        environment:
+            - NODE_ENV=${MODE}
+        ports:
+            - ${PORT}:${PORT}
+        expose:
+            - ${PORT}
