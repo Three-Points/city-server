@@ -8,9 +8,9 @@ The propuse of this project is create a little server to complete the master mod
 
 Also, this project will consider next points:
 
-- DevOps integration with CI environment (Github Actions).
-- Rest API definition
-- MVC architecture as clean architecture
+-   DevOps integration with CI environment (Github Actions).
+-   Rest API definition
+-   MVC architecture as clean architecture
 
 > **Note.** This project is on https://[name].herokuapp.com
 
