@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
 import ErrorServer from '@controllers/ErrorServer.controller'
-
 import { complete, fail } from '@utils/logger.util'
 
 /**
@@ -14,8 +13,9 @@ export const error = (
 ) => {
     const { code, error, message } = err
     fail(error, message)
-    res.status(code || 500).send(message)
+    res.status(code).send(message)
 }
+
 /**
  * @description Handler successful response as express middleware. */
 export const success = (req: Request, res: Response, next: NextFunction) => {

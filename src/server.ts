@@ -6,7 +6,9 @@ import swagger from './swagger'
 import { MODE, PORT } from '@config/env'
 import { version } from '../package.json'
 
-import index from '@routes/index.routes'
+import index from '@routes/index.route'
+import employees from '@routes/employees.route'
+import employee from '@routes/employee.route'
 
 import { error } from '@middlewares/response.middleware'
 
@@ -23,6 +25,8 @@ server.use(express.urlencoded({ limit: '25mb', extended: true }))
 
 server.use(`/docs`, swaggerUi.serve, swaggerUi.setup(swagger))
 server.use('/api', index)
+server.use('/api/employee', employee)
+server.use('/api/employees', employees)
 
 server.use(error)
 

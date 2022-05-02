@@ -1,12 +1,12 @@
 {
-    "name": "city-server",
-    "version": "0.1.0",
-    "description": "A little server",
+    "name": "zentrity",
+    "version": "0.2.0",
+    "description": "Server Architecture",
     "main": "src/index.ts",
     "scripts": {
         "format": "npx prettier --write .",
         "dev": "nodemon ./src/index",
-        "test": "jest",
+        "test": "jest --silent",
         "prebuild": "rm -rf dist",
         "build": "tsc -p tsconfig.build.json",
         "start": "node src/index.js"
@@ -34,7 +34,7 @@
         "@types/swagger-ui-express": "4.1.3",
         "husky": "7.0.4",
         "jest": "27.4.3",
-        "nodemon": "2.0.15",
+        "nodemon": "2.0.16",
         "prettier": "2.5.1",
         "supertest": "6.1.6",
         "ts-jest": "27.1.0",
@@ -93,6 +93,7 @@
         "@middlewares": "./src/middlewares",
         "@models": "./src/models",
         "@routes": "./src/routes",
+        "@services": "./src/services",
         "@utils": "./src/utils",
         "@validators": "./src/validators"
     },
@@ -111,6 +112,7 @@
             "@middlewares/(.*)": "<rootDir>/src/middlewares/$1",
             "@models/(.*)": "<rootDir>/src/models/$1",
             "@routes/(.*)": "<rootDir>/src/routes/$1",
+            "@services/(.*)": "<rootDir>/src/services/$1",
             "@utils/(.*)": "<rootDir>/src/utils/$1",
             "@validators/(.*)": "<rootDir>/src/validators/$1"
         }

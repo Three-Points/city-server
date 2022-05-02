@@ -3,6 +3,9 @@ node_modules/
 dist/
 .env
 
+# Libraries ignores
+coverage/
+
 # Context ignores
 .idea/
 .vscode/
