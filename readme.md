@@ -1,4 +1,4 @@
-# City Server
+# Zentrity
 
 <img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=EBCB8B&label=version&prefix=v&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2FThree-Points%2Fcity-server%2Fdevelopment%2Fpackage.json" alt="Version project" />
 
@@ -12,7 +12,7 @@ Also, this project will consider next points:
 -   Rest API definition
 -   MVC architecture as clean architecture
 
-> **Note.** This project is on https://[name].herokuapp.com
+> **Note.** This project is on https://zentrity.herokuapp.com/api
 
 ### 📦 Unboxing project
 

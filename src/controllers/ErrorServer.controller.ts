@@ -1,12 +1,15 @@
-/**@class ErrorServer
+/**
+ * @class ErrorServer
  * @description ErrorServer collection in server. */
 export default class ErrorServer extends Error {
     /**
      * @description Representational error code. */
     public code: number
+
     /**
      * @description Error message as default. */
     public error: string
+
     /**
      * @private
      * @description Dictionary of error controller. */

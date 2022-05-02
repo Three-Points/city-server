@@ -10,7 +10,7 @@ server.set('url', SERVER_URL)
 server.set('version', version)
 
 server.listen(server.get('port'), () => {
-    console.log(`⬢ City - ${server.get('mode')}`)
+    console.log(`⬢ Zentrity - ${server.get('mode')}`)
     console.log(`◌ Listening Server on ${server.get('url')}`)
     console.log(`◌ v${server.get('version')}`)
 })
