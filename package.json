@@ -1,9 +1,15 @@
 {
     "name": "zentrity",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Server Architecture",
     "main": "src/index.ts",
     "scripts": {
+        "db:generate": "npx prismix && npx prisma format",
+        "db:seed": "ts-node ./src/db/seeds/dev.seed.ts",
+        "db:push": "npx prisma db push",
+        "db:reset": "pnpm run db:generate && npx prisma migrate reset",
+        "db:migrate": "npx prisma migrate dev --name",
+        "db:deploy": "npx prisma migrate deploy",
         "format": "npx prettier --write .",
         "dev": "nodemon ./src/index",
         "test": "jest --silent",
@@ -12,6 +18,7 @@
         "start": "node src/index.js"
     },
     "dependencies": {
+        "@prisma/client": "3.13.0",
         "chalk": "4.1.2",
         "cors": "2.8.5",
         "dotenv": "10.0.0",
@@ -19,6 +26,7 @@
         "express": "4.17.1",
         "joi": "17.6.0",
         "module-alias": "2.2.2",
+        "prisma": "3.13.0",
         "swagger-jsdoc": "6.2.1",
         "swagger-ui-express": "4.3.0"
     },
@@ -36,6 +44,7 @@
         "jest": "27.4.3",
         "nodemon": "2.0.16",
         "prettier": "2.5.1",
+        "prismix": "1.0.21",
         "supertest": "6.1.6",
         "ts-jest": "27.1.0",
         "ts-node": "10.4.0",
@@ -116,5 +125,9 @@
             "@utils/(.*)": "<rootDir>/src/utils/$1",
             "@validators/(.*)": "<rootDir>/src/validators/$1"
         }
+    },
+    "prisma": {
+        "schema": "./prisma/schema.prisma",
+        "seed": "ts-node ./src/db/seeds/dev.seed.ts"
     }
 }

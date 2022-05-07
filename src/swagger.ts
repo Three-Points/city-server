@@ -1,12 +1,12 @@
 import swaggerJsdoc from 'swagger-jsdoc'
 
-import { version, description } from '../package.json'
+import { version, name } from '../package.json'
 
 const options = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: description,
+            title: name,
             version,
         },
     },

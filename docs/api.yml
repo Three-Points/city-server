@@ -1,0 +1,239 @@
+openapi: 3.1.0
+info:
+    version: 0.2.0
+    title: API
+    license:
+        name: MIT
+        url: 'https://github.com/Three-Points/zentrity/blob/development/project/markdown/license.md'
+    description: |
+        The propose of this project is create a little server to complete the master module named **Server Architecture** that will be a simple example of NodeJS server.
+
+        Also, this project will consider next points:
+
+        -   DevOps integration with CI environment (Github Actions).
+        -   Rest API definition
+        -   MVC architecture as clean architecture
+
+        [![Website](https://img.shields.io/badge/Website-ECEFF4?style=for-the-badge&logo=iCloud&logoColor=2E3440)](https://zentrity.herokuapp.com/api)
+externalDocs:
+    description: Github project ✨
+    url: 'https://github.com/Three-Points/zentrity'
+tags:
+    - name: Post
+      description: Post as articles.
+servers:
+    - url: 'http://localhost:3000/api'
+      description: Development server
+    - url: 'https://zentrity.herokuapp.com/api'
+      description: Staging server
+paths:
+    /posts:
+        get:
+            tags:
+                - Post
+            summary: Get all posts
+            description: |
+                Return all post paginated in the database or by query.
+            operationId: getPosts
+            parameters:
+                - name: page
+                  in: query
+                  description: Post paginated.
+                  schema:
+                      type: number
+                      minimum: 1
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    info:
+                                        allOf:
+                                            - $ref: '#/components/schemas/Info'
+                                        example:
+                                            page: 1
+                                            next: http://localhost:3000/api/posts?page=2
+                                            prev: null
+                                    results:
+                                        type: array
+                                        items:
+                                            allOf:
+                                                - $ref: '#/components/schemas/Post'
+                                            example:
+                                                id: 1
+                                                title: A Title
+                                                text: A Text Description
+                                                author: Smith
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+    /post:
+        post:
+            tags:
+                - Post
+            summary: Create Post
+            description: |
+                Create a new post in the database.
+            operationId: createPost
+            requestBody:
+                content:
+                    application/json:
+                        allOf:
+                            - $ref: '#/components/schemas/Post'
+                        example:
+                            title: A Title
+                            text: A Text Description
+                            author: Smith
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/Post'
+                                example:
+                                    id: 1
+                                    title: A Title
+                                    text: A Text Description
+                                    author: Smith
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+    /post/{id}:
+        get:
+            tags:
+                - Post
+            summary: Get A Post
+            description: |
+                Return a post with the given id.
+            operationId: getPostById
+            parameters:
+                - name: id
+                  in: path
+                  description: Post id
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/Post'
+                                example:
+                                    id: 1
+                                    title: A Title
+                                    text: A Text Description
+                                    author: Smith
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+        patch:
+            tags:
+                - Post
+            summary: Update A Post
+            description: |
+                Return a post updated with the given id.
+            operationId: updatePost
+            parameters:
+                - name: id
+                  in: path
+                  description: Post id
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/Post'
+                                example:
+                                    id: 1
+                                    title: A Title
+                                    text: A Text Description
+                                    author: Smith
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+        delete:
+            tags:
+                - Post
+            summary: Get Post
+            description: Delete a post with the given id.
+            operationId: deletePost
+            parameters:
+                - name: id
+                  in: path
+                  description: Post id
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/Post'
+                                example:
+                                    id: 1
+                                    title: A Title
+                                    text: A Text Description
+                                    author: Smith
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+components:
+    schemas:
+        Info:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Page number
+                next:
+                    type: string
+                    description: Next page url
+                prev:
+                    type: string
+                    description: Previous page url
+        Post:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    description: Post id
+                title:
+                    type: string
+                    description: Post title
+                text:
+                    type: string
+                    description: Post description
+                author:
+                    type: string
+                    description: Author's post
+    responses:
+        BadRequest:
+            description: The specified resource was bad request
+            content:
+                application/json:
+                    schema:
+                        type: string
+                        example: Bad request
+        NotFound:
+            description: The specified resource was not found
+            content:
+                application/json:
+                    schema:
+                        type: string
+                        example: Not found
