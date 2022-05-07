@@ -2,7 +2,9 @@ import 'module-alias/register'
 import { PrismaClient } from '@prisma/client'
 
 import posts from '@db/mocks/post.mock'
+import users from '@db/mocks/user.mock'
 import { IPost } from '@models/Post/Post.entity'
+import { IUser } from '@models/User/User.entity'
 import { complete, info, fail } from '@utils/logger.util'
 
 const _prisma = new PrismaClient()
@@ -24,6 +26,7 @@ async function createBatch<TModel>(name: string, collection: Array<TModel>) {
 
 ;(async () => {
     await createBatch<IPost>('post', posts)
+    await createBatch<IUser>('user', users)
 })()
     .then(() => {
         _prisma.$disconnect()
