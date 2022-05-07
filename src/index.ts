@@ -12,7 +12,7 @@ server.set('version', version)
 
 server.listen(server.get('PORT'), () => {
     console.log(`⬢ Zentrity - ${server.get('MODE')}`)
-    console.log(`◌ Listening Server on ${server.get('SERVER_URL')}`)
+    console.log(`◌ Listening Server on ${server.get('SERVER_URL')}/api`)
     console.log(`◌ Listening Database on ${server.get('DB_URL')}`)
     console.log(`◌ v${server.get('version')}`)
 })
