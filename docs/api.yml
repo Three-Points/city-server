@@ -6,7 +6,7 @@ info:
         name: MIT
         url: 'https://github.com/Three-Points/zentrity/blob/development/project/markdown/license.md'
     description: |
-        The propuse of this project is create a little server to complete the master module named **Server Architecture** that will be a simple example of NodeJS server.
+        The propose of this project is create a little server to complete the master module named **Server Architecture** that will be a simple example of NodeJS server.
 
         Also, this project will consider next points:
 
@@ -19,46 +19,29 @@ externalDocs:
     description: Github project ✨
     url: 'https://github.com/Three-Points/zentrity'
 tags:
-    - name: Employee
-      description: People register inside of platform.
+    - name: Post
+      description: Post as articles.
 servers:
     - url: 'http://localhost:3000/api'
       description: Development server
     - url: 'https://zentrity.herokuapp.com/api'
       description: Staging server
 paths:
-    /employees:
+    /posts:
         get:
             tags:
                 - Post
-            summary: Gets Employees
+            summary: Get all posts
             description: |
-                Return all employees in the database or by query.
-            operationId: getEmployees
+                Return all post paginated in the database or by query.
+            operationId: getPosts
             parameters:
                 - name: page
                   in: query
-                  description: Employees paginated.
+                  description: Post paginated.
                   schema:
                       type: number
                       minimum: 1
-                - name: badges
-                  in: query
-                  description: Search by Badge Color
-                  schema:
-                      type: array
-                      items:
-                          type: string
-                          enum:
-                              - blue
-                              - black
-                              - green
-                              - orange
-                - name: name
-                  in: query
-                  description: Search by Name
-                  schema:
-                      type: string
             responses:
                 '200':
                     description: Success
@@ -67,91 +50,42 @@ paths:
                             schema:
                                 type: object
                                 properties:
+                                    info:
+                                        allOf:
+                                            - $ref: '#/components/schemas/Info'
+                                        example:
+                                            page: 1
+                                            next: http://localhost:3000/api/posts?page=2
+                                            prev: null
                                     results:
                                         type: array
                                         items:
                                             allOf:
-                                                - $ref: '#/components/schemas/Employee'
+                                                - $ref: '#/components/schemas/Post'
                                             example:
-                                                name: Sue
-                                                age: 19
-                                                phone:
-                                                    personal: 555-123-123
-                                                    work: 555-456-456
-                                                    ext: '2342'
-                                                privileges: user
-                                                favorites:
-                                                    artis: Picasso
-                                                    food: pizza
-                                                finished:
-                                                    - 17
-                                                    - 3
-                                                badges:
-                                                    - blue
-                                                    - black
-                                                points:
-                                                    - points: 85
-                                                      bonus: 20
-                                                    - points: 85
-                                                      bonus: 10
+                                                id: 1
+                                                title: A Title
+                                                text: A Text Description
+                                                author: Smith
                 '400':
                     $ref: '#/components/responses/BadRequest'
+    /post:
         post:
             tags:
                 - Post
-            summary: Create Employee
+            summary: Create Post
             description: |
-                Create a new employee in the database.
-            operationId: createEmployee
-            responses:
-                '200':
-                    description: Success
-                    content:
-                        application/json:
-                            schema:
-                                type: object
-                                properties:
-                                    employee:
-                                        allOf:
-                                            - $ref: '#/components/schemas/Employee'
-                                        example:
-                                            name: Emmanuel
-                                            age: 27
-                                            phone:
-                                                personal: 555-123-123
-                                                work: 555-456-456
-                                                ext: '2342'
-                                            privileges: admin
-                                            favorites:
-                                                artis: Miro
-                                                food: tacos
-                                            finished:
-                                                - 20
-                                                - 4
-                                            badges:
-                                                - blue
-                                                - orange
-                                            points:
-                                                - points: 67
-                                                  bonus: 10
-                                                - points: 36
-                                                  bonus: 50
-                '400':
-                    $ref: '#/components/responses/BadRequest'
-    /employee:
-        get:
-            tags:
-                - Post
-            summary: Get Employee
-            description: |
-                Return the oldest employee in the database.
-            operationId: getEmployee
-            parameters:
-                - name: oldest
-                  in: query
-                  description: Oldest filter.
-                  schema:
-                      type: boolean
+                Create a new post in the database.
+            operationId: createPost
+            requestBody:
+                content:
+                    application/json:
+                        allOf:
+                            - $ref: '#/components/schemas/Post'
+                        example:
+                            title: A Title
+                            text: A Text Description
+                            author: Smith
             responses:
                 '200':
                     description: Success
@@ -159,99 +93,135 @@ paths:
                         application/json:
                             schema:
                                 allOf:
-                                    - $ref: '#/components/schemas/Employee'
+                                    - $ref: '#/components/schemas/Post'
                                 example:
-                                    name: Sue
-                                    age: 19
-                                    phone:
-                                        personal: 555-123-123
-                                        work: 555-456-456
-                                        ext: '2342'
-                                    privileges: user
-                                    favorites:
-                                        artis: Picasso
-                                        food: pizza
-                                    finished:
-                                        - 17
-                                        - 3
-                                    badges:
-                                        - blue
-                                        - black
-                                    points:
-                                        - points: 85
-                                          bonus: 20
-                                        - points: 85
-                                          bonus: 10
+                                    id: 1
+                                    title: A Title
+                                    text: A Text Description
+                                    author: Smith
                 '400':
                     $ref: '#/components/responses/BadRequest'
-
+                '404':
+                    $ref: '#/components/responses/NotFound'
+    /post/{id}:
+        get:
+            tags:
+                - Post
+            summary: Get A Post
+            description: |
+                Return a post with the given id.
+            operationId: getPostById
+            parameters:
+                - name: id
+                  in: path
+                  description: Post id
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/Post'
+                                example:
+                                    id: 1
+                                    title: A Title
+                                    text: A Text Description
+                                    author: Smith
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+        patch:
+            tags:
+                - Post
+            summary: Update A Post
+            description: |
+                Return a post updated with the given id.
+            operationId: updatePost
+            parameters:
+                - name: id
+                  in: path
+                  description: Post id
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/Post'
+                                example:
+                                    id: 1
+                                    title: A Title
+                                    text: A Text Description
+                                    author: Smith
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+        delete:
+            tags:
+                - Post
+            summary: Get Post
+            description: Delete a post with the given id.
+            operationId: deletePost
+            parameters:
+                - name: id
+                  in: path
+                  description: Post id
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Success
+                    content:
+                        application/json:
+                            schema:
+                                allOf:
+                                    - $ref: '#/components/schemas/Post'
+                                example:
+                                    id: 1
+                                    title: A Title
+                                    text: A Text Description
+                                    author: Smith
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '404':
+                    $ref: '#/components/responses/NotFound'
 components:
     schemas:
-        Employee:
+        Info:
             type: object
             properties:
-                name:
+                page:
+                    type: integer
+                    description: Page number
+                next:
                     type: string
-                    description: Employee's name
-                age:
-                    description: Employee's age
-                    type: number
-                phone:
-                    type: object
-                    description: Employee's phone contact
-                    properties:
-                        personal:
-                            type: string
-                            description: Personal phone
-                        work:
-                            type: string
-                            description: Work phone
-                        ext:
-                            type: string
-                            description: Work phone extension
-                privileges:
+                    description: Next page url
+                prev:
                     type: string
-                    description: Employee's privileges
-                    enum:
-                        - admin
-                        - user
-                favorites:
-                    type: object
-                    description: Employee's favorites things
-                    properties:
-                        artist:
-                            type: string
-                            description: Artist's name
-                        food:
-                            type: string
-                            description: Favorite food
-                        finished:
-                            type: array
-                            description: Finished numeration
-                            items:
-                                type: number
-                        badges:
-                            type: array
-                            description: Badges colors
-                            items:
-                                type: string
-                                enum:
-                                    - black
-                                    - blue
-                                    - orange
-                                    - green
-                        points:
-                            type: array
-                            description: Points collection
-                            items:
-                                type: object
-                                properties:
-                                    points:
-                                        type: number
-                                        description: Points
-                                    bonus:
-                                        type: number
-                                        description: Bonus
+                    description: Previous page url
+        Post:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    description: Post id
+                title:
+                    type: string
+                    description: Post title
+                text:
+                    type: string
+                    description: Post description
+                author:
+                    type: string
+                    description: Author's post
     responses:
         BadRequest:
             description: The specified resource was bad request
@@ -260,3 +230,10 @@ components:
                     schema:
                         type: string
                         example: Bad request
+        NotFound:
+            description: The specified resource was not found
+            content:
+                application/json:
+                    schema:
+                        type: string
+                        example: Not found
