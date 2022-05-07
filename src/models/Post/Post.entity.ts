@@ -4,11 +4,14 @@ export interface IPost {
     text: string
     author: string
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
 }
 
-export type TQuery = Pick<IPost, 'id'>
-export type TPayload = {
+export type TQPost = {
+    id?: number
+    page?: number
+}
+export type TPPost = {
     title?: string
     text?: string
     author?: string
