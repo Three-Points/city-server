@@ -4,7 +4,8 @@
 
 ### ✨Introduction
 
-The propuse of this project is create a little server to complete the master module named **Server Architecture** that will be a simple example of NodeJS server.
+The propuse of this project is create a little server to complete the master module named **Server Architecture** that
+will be a simple example of NodeJS server.
 
 Also, this project will consider next points:
 
@@ -13,6 +14,9 @@ Also, this project will consider next points:
 -   MVC architecture as clean architecture
 
 > **Note.** This project is on https://zentrity.herokuapp.com/api
+
+Also, you need to get environment variables to run this project. For that, this project is supported
+by [Doppler](https://www.doppler.com/).
 
 ### 📦 Unboxing project
 
@@ -28,14 +32,30 @@ Also, this project will consider next points:
 | `npm run build`   | Build the base code to `dist` directory.          |
 | `npm run start`   | Run server in mode `production` on port `8080`.   |
 
-> **Note.** For mode Production, you can use [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) to simulate the project witih `heroku local`.
+> **Note.** For mode Production, you can use [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) to simulate
+> the project witih `heroku local`.
 
 #### ⚙️ Configuration
 
-> **Note.** Thingst is already configured for git hooks and CI.
+> **Note.** Zentrity is already configured for git hooks and CI.
 
-Husky is a tool that helps you to configure git hooks. Since the reason for use git hooks because each commit has the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) structure.
+Husky is a tool that helps you to configure git hooks. Since the reason for use git hooks because each commit has
+the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) structure.
 
 Also, the Github Actions is a tool that helps you to run the tests and build the project.
 
-> **Note.** You can view this feature at `.github/workflows` direcotry.
+> **Note.** You can view this feature at `.github/workflows` directory.
+
+### 🚧 Works modes
+
+> **Note.** All scripts need to install dependencies. You can run `npm run install` to install all dependencies.
+
+Depending on the mode, the server will run in different ways. As additional environment, you can select docker
+environment to simulate heroky environment.
+
+For playing Docker, run Docker Compose:
+
+```bash
+npm run build
+docker-compose up -d
+```
