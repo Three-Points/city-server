@@ -2,10 +2,13 @@ services:
     node:
         build: .
         container_name: ${MODE}
-        working_dir: /server
-        environment:
-            - NODE_ENV=${MODE}
         ports:
             - ${PORT}:${PORT}
         expose:
             - ${PORT}
+        environment:
+            - SERVER_URL
+            - DB_URL
+            - DOMAIN
+            - PORT
+            - MODE=production
