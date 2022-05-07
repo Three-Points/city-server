@@ -25,7 +25,7 @@ by [Doppler](https://www.doppler.com/).
 #### ⚡️Scripts
 
 | Script            | Description                                       |
-|-------------------|:--------------------------------------------------|
+| ----------------- | :------------------------------------------------ |
 | `npm run install` | Install all dependencies and prepare the project. |
 | `npm run dev`     | Run server in mode `development` on port `3000`.  |
 | `npm run test`    | Run all test (both unit test and integration).    |
