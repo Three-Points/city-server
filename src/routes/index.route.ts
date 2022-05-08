@@ -3,7 +3,9 @@ import { Router, Response, NextFunction } from 'express'
 import server from '../server'
 import { success } from '@middlewares/response.middleware'
 import wrapper from '@middlewares/wrapper.middleware'
+import { login } from '@services/auth.service'
 import { info } from '@utils/logger.util'
+import { validatorLogin } from '@validators/user.validator'
 
 const router = Router()
 
@@ -19,6 +21,21 @@ router.get(
             mode: server.get('mode'),
             version: server.get('version'),
         }
+        next()
+    }),
+    success
+)
+
+/**
+ * @name POST
+ * @description Login. */
+router.post(
+    '/login',
+    validatorLogin,
+    wrapper(async (req, res: Response, next: NextFunction) => {
+        info('POST /api/login')
+        const { email, password } = req.body
+        res.locals.data = await login(email, password)
         next()
     }),
     success

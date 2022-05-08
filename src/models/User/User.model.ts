@@ -30,8 +30,8 @@ export default class User extends Model<IUser, TQUser, TPUser> {
      * @description Find a user.
      * @param {TQUser} query Query to find user.
      * @returns User. */
-    async findUnique({ id }: TQUser) {
-        return await this.client.findUnique({ where: { id } })
+    async findUnique(query: TQUser) {
+        return await this.client.findUnique({ where: query })
     }
 
     /**

@@ -6,6 +6,7 @@ dotenvExpand(env)
 
 export const MODE = process.env.NODE_ENV || process.env.MODE
 export const PORT = process.env.PORT
+export const JWT_TOKEN = process.env.JWT_TOKEN
 
 export const DB_URL = process.env.DB_URL
 export const SERVER_URL = process.env.SERVER_URL
