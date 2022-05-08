@@ -1,5 +1,7 @@
 import UserController from '@controllers/User.controller'
 import { TPUser } from '@models/User/User.entity'
+import { sendVerificationEmail } from '@services/mailer.service'
+import { decrypt } from '@utils/crypter.util'
 
 const userController = new UserController()
 
@@ -20,11 +22,13 @@ export const getUserById = (id: number) => {
 }
 
 /**
- * @description Create a user.
+ * @description Create a user and send a verification email.
  * @param {TPUser} payload Payload to create a user.
  * @returns User. */
-export const createUser = (payload: TPUser) => {
-    return userController.createUser(payload)
+export const createUser = async (payload: TPUser) => {
+    const user = await userController.createUser(payload)
+    await sendVerificationEmail(user.email)
+    return user
 }
 
 /**
@@ -42,4 +46,13 @@ export const updateUser = (id: number, payload: TPUser) => {
  * @returns Post. */
 export const deleteUser = (id: number) => {
     return userController.deleteUser({ id })
+}
+
+/**
+ * @description Active a user by id.
+ * @param {string} token Encrypted token.
+ * @returns Post. */
+export const activeUser = (token: string) => {
+    const email = decrypt(token)
+    return userController.updateUser({ email }, { active: true })
 }
