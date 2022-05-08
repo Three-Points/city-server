@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import ErrorServer from '@controllers/ErrorServer.controller'
 import User from '@models/User/User.model'
 import { TQUser, TPUser } from '@models/User/User.entity'
@@ -26,10 +27,14 @@ export default class UserController {
 
     /**
      * @description Create a user.
+     * @param {string} password
      * @param {TPPost} payload
      * @returns User. */
-    async createUser(payload: TPUser) {
-        return await this.model.create(payload)
+    async createUser({ password, ...payload }: TPUser) {
+        return await this.model.create({
+            ...payload,
+            password: await bcrypt.hash(password as string, 10),
+        })
     }
 
     /**

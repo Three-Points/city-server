@@ -47,8 +47,8 @@ export default class User extends Model<IUser, TQUser, TPUser> {
      * @param {TQUser} query Query to find user.
      * @param {TPUser} payload Payload to create a user.
      * @returns User. */
-    async update({ id }: TQUser, payload: TPUser) {
-        return await this.client.update({ where: { id }, data: payload })
+    async update(query: TQUser, payload: TPUser) {
+        return await this.client.update({ where: query, data: payload })
     }
 
     /**
