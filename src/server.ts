@@ -7,8 +7,10 @@ import { MODE, PORT } from '@config/env'
 import { version } from '../package.json'
 
 import index from '@routes/index.route'
-import post from '@routes/post.route'
-import posts from '@routes/posts.route'
+import post from '@routes/Post/post.route'
+import posts from '@routes/Post/posts.route'
+import user from '@routes/User/user.route'
+import users from '@routes/User/users.route'
 
 import { error } from '@middlewares/response.middleware'
 
@@ -27,6 +29,8 @@ server.use(`/docs`, swaggerUi.serve, swaggerUi.setup(swagger))
 server.use('/api', index)
 server.use('/api/post', post)
 server.use('/api/posts', posts)
+server.use('/api/user', user)
+server.use('/api/users', users)
 
 server.use(error)
 
