@@ -20,7 +20,7 @@ router.post(
     validator,
     wrapper(async (req: Request, res: Response, next: NextFunction) => {
         info('POST /post')
-        res.locals.data = await createPost(req.body.post)
+        res.locals.data = await createPost(req.body)
         next()
     }),
     success

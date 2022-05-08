@@ -12,6 +12,7 @@ export interface IUser {
 
 export type TQUser = {
     id?: number
+    email?: string
     page?: number
 }
 export type TPUser = {

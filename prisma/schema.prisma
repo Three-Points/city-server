@@ -22,9 +22,9 @@ model Post {
 model User {
   id        Int      @id @default(autoincrement())
   name      String
-  email     String
+  email     String   @unique
   password  String
-  bio       String
+  bio       String?
   active    Boolean  @default(false)
   role      String   @default("USER")
   createdAt DateTime @default(now())
