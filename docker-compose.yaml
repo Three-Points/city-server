@@ -1,6 +1,7 @@
 services:
     node:
-        build: .
+        #        build: .
+        image: rorem/zentrity
         container_name: ${MODE}
         ports:
             - ${PORT}:${PORT}
@@ -12,3 +13,4 @@ services:
             - DOMAIN
             - PORT
             - MODE=production
+            - ENCRYPT_TOKEN

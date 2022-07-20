@@ -30,28 +30,13 @@ export default class AuthController {
     }
 
     /**
-     * @description Verify an account.
+     * @description Verify an account identity.
      * @param {string} token
      * @throws ErrorServer - UNAUTHORIZED
      * @returns User */
     async verification(token: string) {
-        if (!token) throw new ErrorServer('UNAUTHORIZED')
-        const verified = jwt.verify(token, JWT_TOKEN as string) as IUser
-        if (!verified) throw new ErrorServer('UNAUTHORIZED')
-        const user = await this.userController.findUser({ id: verified.id })
-        if (!user.active) throw new ErrorServer('UNAUTHORIZED')
-        return user
-    }
-
-    /**
-     * @description Authorization an account by id given.
-     * @param {string} token
-     * @param {number} id
-     * @throws ErrorServer - UNAUTHORIZED */
-    async authorizationById(token: string, id: number) {
-        const verified = jwt.verify(token, JWT_TOKEN as string) as IUser
-        if (!verified || verified.id !== id)
-            throw new ErrorServer('UNAUTHORIZED')
+        const verify = jwt.verify(token, JWT_TOKEN as string) as IUser
+        return await this.userController.findUser({ id: verify.id })
     }
 
     /**
@@ -59,9 +44,8 @@ export default class AuthController {
      * @param {string} token
      * @throws ErrorServer - UNAUTHORIZED */
     async authorizationByRole(token: string) {
-        const verified = jwt.verify(token, JWT_TOKEN as string) as IUser
-        if (!verified) throw new ErrorServer('UNAUTHORIZED')
-        const user = await this.userController.findUser({ id: verified.id })
+        const { id } = await this.verification(token)
+        const user = await this.userController.findUser({ id })
         if (user.role !== 'ADMIN') throw new ErrorServer('UNAUTHORIZED')
     }
 }

@@ -3,5 +3,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 pnpm run format
-doppler run -- pnpm test
+#doppler run -- pnpm test
 npx --no-install commitlint --edit

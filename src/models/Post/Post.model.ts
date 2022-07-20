@@ -20,7 +20,7 @@ export default class Post extends Model<IPost, TQPost, TPPost> {
     async findMany(query?: TQPost) {
         return [
             await this.client.findMany({
-                ...this.pagination(query?.page || 1),
+                // ...this.pagination(query?.page || 1),
             }),
             await this.client.count(),
         ]

@@ -1,0 +1,12 @@
+model Tag {
+  id        Int      @id @default(autoincrement())
+  text      String   @unique
+   posts  Post[]
+
+  @@map("tag")
+}
+
+model Post {
+    id        Int      @id @default(autoincrement())
+    tags  Tag[]
+}

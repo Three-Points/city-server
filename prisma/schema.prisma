@@ -15,12 +15,16 @@ model Post {
   author    String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(name: "PostToUser", fields: [userId], references: [id])
+  tags      Tag[]    @relation(name: "PostToTag")
 
   @@map("post")
 }
 
 model User {
   id        Int      @id @default(autoincrement())
+  posts     Post[]   @relation(name: "PostToUser")
   name      String
   email     String   @unique
   password  String
@@ -31,4 +35,12 @@ model User {
   updatedAt DateTime @default(now())
 
   @@map("user")
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  text  String @unique
+  posts Post[] @relation(name: "PostToTag")
+
+  @@map("tag")
 }

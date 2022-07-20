@@ -11,7 +11,7 @@ import {
 } from '@services/user.service'
 import { verify } from '@services/auth.service'
 import { info } from '@utils/logger.util'
-import { validator } from '@validators/user.validator'
+import { authorization, validator } from '@validators/user.validator'
 
 const router = Router()
 
@@ -19,6 +19,7 @@ const router = Router()
  * @description Get a personal profile. */
 router.get(
     '/',
+    authorization,
     validator,
     wrapper(async (req: Request, res: Response, next: NextFunction) => {
         info('GET /user')
@@ -46,6 +47,7 @@ router.post(
  * @description Update personal information. */
 router.patch(
     '/',
+    authorization,
     validator,
     wrapper(async (req: Request, res: Response, next: NextFunction) => {
         info('PATCH /user')

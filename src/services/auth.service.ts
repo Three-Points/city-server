@@ -23,11 +23,3 @@ export const verify = async (token: string) => {
 export const authorizationByRole = async (token: string) => {
     return await authController.authorizationByRole(token)
 }
-
-/**
- * @description Authorization by introspect id given.
- * @param {string} token
- * @param {number} id */
-export const authorizationById = async (token: string, id: number) => {
-    return await authController.authorizationById(token, id)
-}
