@@ -18,17 +18,11 @@ const postResponse = {
     updatedAt: '2022-05-06T15:00:35.469Z',
 }
 
-jest.spyOn(Prisma.prototype, 'create')
-    .mockImplementationOnce(() => Promise.resolve())
-    .mockImplementationOnce(() => Promise.resolve(postResponse))
-jest.spyOn(Prisma.prototype, 'update')
-    .mockImplementationOnce(() => Promise.resolve())
-    .mockImplementationOnce(() => Promise.resolve(postResponse))
-jest.spyOn(Prisma.prototype, 'delete').mockImplementationOnce(() =>
-    Promise.resolve()
-)
-
 describe('POST /api/post', () => {
+    jest.spyOn(Prisma.prototype, 'create')
+        .mockImplementationOnce(() => Promise.resolve())
+        .mockImplementationOnce(() => Promise.resolve(postResponse))
+
     it('should return 200 OK', async () => {
         const { status } = await request.post('/api/post')
         expect(status).toBe(201)
@@ -53,7 +47,7 @@ describe('GET /api/post', () => {
         const { status } = await request.get('/api/post/1')
         expect(status).toBe(200)
     })
-    it('should return 200 OK', async () => {
+    it('should return 404 OK', async () => {
         const { status } = await request.get('/api/post/20')
         expect(status).toBe(404)
     })
@@ -73,6 +67,10 @@ describe('GET /api/post', () => {
 })
 
 describe('PATCH /api/post', () => {
+    jest.spyOn(Prisma.prototype, 'update')
+        .mockImplementationOnce(() => Promise.resolve())
+        .mockImplementationOnce(() => Promise.resolve(postResponse))
+
     it('should return 200 OK', async () => {
         const { status } = await request.patch('/api/post/1')
         expect(status).toBe(200)
@@ -96,6 +94,10 @@ describe('PATCH /api/post', () => {
 })
 
 describe('DELETE /api/post', () => {
+    jest.spyOn(Prisma.prototype, 'delete').mockImplementationOnce(() =>
+        Promise.resolve()
+    )
+
     it('should return 200 OK', async () => {
         const { status } = await request.delete('/api/post/1')
         expect(status).toBe(204)

@@ -2,6 +2,10 @@ import Joi from 'joi'
 
 export const active = Joi.boolean()
 
+export const Authorization = Joi.string().required().messages({
+    'string.empty': 'Unauthorized',
+})
+
 export const author = Joi.string().min(5).max(15).messages({
     'string.base': 'Author must be a string.',
     'string.min': 'Author must be at least 5.',
